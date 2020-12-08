@@ -77,5 +77,15 @@ class MealsController < ApplicationController
         end
     end
 
-
+    delete '/meals/:id/delete' do
+        if logged_in?
+            @meal = Meal.find(params[:id])
+            if @meal && @meal.user == current_user
+                @meal.delete
+            end
+            redirect to '/meals'
+        else
+            redirect to '/login'
+        end
+    end
 end

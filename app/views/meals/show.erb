@@ -7,3 +7,12 @@
 <br>
 
 <a href="/meals/<%= @meal.id %>/edit">Edit Meal</a>
+<br></br>
+<a href="/meals"> All Meals </a>
+<br></br>
+
+<%# creates a delete button to delete meal %>
+<form method="post" action="/meals/<%=@meal.id%>/delete">
+<input id="hidden" type="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete Meal">
+</form>
