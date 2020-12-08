@@ -1,0 +1,26 @@
+<h4>Edit <%= @meal.name %> Meal</h4>
+<br>
+<form action="/meals/<%=@meal.id%>" method="post">
+<input id="hidden" type="hidden" name="_method" value="PATCH">
+<p>
+<label for="name">Name </label>
+<input type="text" name="meal[name]" id="name">
+</p>
+<p>
+<label for="calories">Calories </label>
+<input type="text" name="meal[calories]" id="calories">
+</p>
+<p>
+<label for="carbohydrates">Carbohydrates </label>
+<input type="text" name="meal[carbohydrates]" id="carbohydrates">
+</p>
+<p>
+<label for="protein">Protein </label>
+<input type="text" name="meal[protein]" id="protein">
+</p>
+<p>
+<label for="fat">Fat </label>
+<input type="text" name="meal[fat]" id="fat">
+</p>
+<input type="submit" value="Update Meal">
+</form>

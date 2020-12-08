@@ -43,7 +43,38 @@ class MealsController < ApplicationController
     end
 
     get '/meals/:id/edit' do
-        "Edit route is working"
+        if logged_in?
+            @meal = Meal.find_by_id(params[:id])
+            if @meal && @meal.user == current_user
+                erb :'/meals/edit'
+            else
+                redirect to '/meals'
+            end
+        else
+            redirect to '/login'
+        end
+    end
+
+    patch '/meals/:id' do
+        params.inspect 
+        if logged_in?
+            if params[:meal] == ""
+                redirect to "/meals/#{params[:id]}/edit"
+            else
+                @meal = Meal.find_by_id(params[:id])
+                if @meal && @meal.user == current_user
+                    if @meal.update(params[:meal])
+                        redirect to "/meals/#{@meal.id}"
+                    else
+                        redirect to "/meals/#{@meal.id}/edit"
+                    end
+                else
+                    redirect to '/meals'
+                end
+            end
+        else
+            redirect to '/login'
+        end
     end
 
 
