@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
     get '/users/:slug' do
+        @user = User.find_by_slug(params[:slug])
+        erb :'/users/show'
     end
 
     get '/signup' do
@@ -12,7 +14,7 @@ class UsersController < ApplicationController
         else
             @user = User.create(params[:user])
             session[:user_id] = @user.id
-            redirect to '/meals'
+            redirect to '/show'
         end
     end
 
