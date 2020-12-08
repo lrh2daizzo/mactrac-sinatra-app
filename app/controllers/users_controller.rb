@@ -5,7 +5,11 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do
-     erb :'users/new'
+        if !logged_in?
+            erb :'users/new'
+        else
+            redirect to '/meals'
+        end
     end
 
     post '/signup' do
@@ -14,7 +18,7 @@ class UsersController < ApplicationController
         else
             @user = User.create(params[:user])
             session[:user_id] = @user.id
-            redirect `/meals`
+            redirect to '/meals'
         end
     end
 
@@ -22,7 +26,7 @@ class UsersController < ApplicationController
         if !logged_in?
             erb :'users/login'
         else
-            redirect `/meals`
+            redirect to '/meals'
         end
     end
 
@@ -30,7 +34,7 @@ class UsersController < ApplicationController
         user = User.find_by(:username => params[:username])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
-            redirect to `/meals`
+            redirect to '/meals'
         else
             redirect to '/signup'
         end
