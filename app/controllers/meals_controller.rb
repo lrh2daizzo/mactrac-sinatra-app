@@ -42,5 +42,9 @@ class MealsController < ApplicationController
         end
     end
 
-    
+    get '/meals/:id/edit' do
+        "Edit route is working"
+    end
+
+
 end
