@@ -1,4 +1,7 @@
 class MealsController < ApplicationController
+    
+    use Rack::Flash
+
     get '/meals' do
         if logged_in?
             @user = User.find(session[:user_id])
@@ -23,6 +26,7 @@ class MealsController < ApplicationController
             else
                 @meal = current_user.meals.build(params[:meal])
                 if @meal.save
+                    flash[:message] = "Succesfully created meal."
                     redirect to "/meals/#{@meal.id}"
                 else
                     redirect to "/meals/new"
@@ -64,6 +68,7 @@ class MealsController < ApplicationController
                 @meal = Meal.find_by_id(params[:id])
                 if @meal && @meal.user == current_user
                     if @meal.update(params[:meal])
+                        flash[:message] = "Successfully updated meal."
                         redirect to "/meals/#{@meal.id}"
                     else
                         redirect to "/meals/#{@meal.id}/edit"

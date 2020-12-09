@@ -113,4 +113,10 @@
     line-height: 24px;
   }
 
+  div.msg {
+    float: center;
+    padding: 20px;
+    color: red;
+  }
+
 }
