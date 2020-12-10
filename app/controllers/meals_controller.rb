@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-    
+
     use Rack::Flash
 
     get '/meals' do
@@ -21,7 +21,8 @@ class MealsController < ApplicationController
 
     post '/meals' do
         if logged_in?
-            if params[:meal] == ""
+            if params[:meal].any? {|k,v| v == ""}
+                flash[:message] = "1 or more attributes left blank."
                 redirect to '/meals/new'
             else
                 @meal = current_user.meals.build(params[:meal])
@@ -60,9 +61,8 @@ class MealsController < ApplicationController
     end
 
     patch '/meals/:id' do
-        params.inspect 
         if logged_in?
-            if params[:meal] == ""
+            if params[:meal].any? {|k,v| v == ""}
                 redirect to "/meals/#{params[:id]}/edit"
             else
                 @meal = Meal.find_by_id(params[:id])

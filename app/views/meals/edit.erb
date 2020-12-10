@@ -1,3 +1,13 @@
+<div class="error" style="color: red; float: right;">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+
+
+
+
 <h4>Edit <%= @meal.name %> Meal</h4>
 <br>
 <form action="/meals/<%=@meal.id%>" method="post">

@@ -1,3 +1,12 @@
+<div class="msg" style="color: red; float: right;">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+
+
+
 <h3>Add New Meal</h3>
 <form action="/meals" method="post">
 <p>
