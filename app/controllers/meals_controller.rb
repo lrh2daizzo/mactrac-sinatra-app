@@ -19,6 +19,7 @@ class MealsController < ApplicationController
         end
     end
 
+    
     post '/meals' do
         if logged_in?
             if params[:meal].any? {|k,v| v == ""}
